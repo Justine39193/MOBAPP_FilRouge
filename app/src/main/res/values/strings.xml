@@ -29,6 +29,7 @@
 
     <string name="reset_action">Reset</string>
     <string name="wiki_search">Search for your town (Wikipedia)</string>
+    <string name="wiki_url">http://en.wikipedia.org/?search=</string>
     <string name="share_town">Share your town</string>
     <string name="shareMsg">Did you know? I was born in</string>
     <string name="shareChooser">Share your town with:</string>

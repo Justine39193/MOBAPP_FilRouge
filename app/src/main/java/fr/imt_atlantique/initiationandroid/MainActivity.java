@@ -48,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
     static final String DEPT = "prefDept";
     static final String PHONEARRAY = "prefPhones";
     static final String USER = "user";
-    static final int RESULT_OK = 1;
-    static final int RESULT_CANCEL = 0;
 
     private TextView mLast;
     private TextView mFirst;
@@ -288,7 +286,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void wikiSearch(MenuItem item) {
-        String url = "http://fr.wikipedia.org/?search=" + mPlace.getText().toString();
+        String url = getString(R.string.wiki_url) + mPlace.getText().toString();
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_WEB_SEARCH);
         sendIntent.putExtra(SearchManager.QUERY, url);

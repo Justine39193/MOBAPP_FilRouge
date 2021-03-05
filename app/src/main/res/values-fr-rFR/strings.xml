@@ -30,6 +30,7 @@
 
     <string name="reset_action">Réinitialiser</string>
     <string name="wiki_search">Rechercher votre ville (Wikipedia)</string>
+    <string name="wiki_url">http://fr.wikipedia.org/?search=</string>
     <string name="share_town">Partager votre ville</string>
     <string name="shareMsg">Le saviez-vous ? Je suis né(e) à </string>
     <string name="shareChooser">Partager votre ville avec :</string>
