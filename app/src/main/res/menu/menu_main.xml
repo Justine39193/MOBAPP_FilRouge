@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/wikiSearch"
+        android:title="@string/wiki_search"
+        android:onClick="wikiSearch">
+    </item>
+    <item android:id="@+id/sharePlace"
+        android:title="@string/share_town"
+        android:onClick="sharePlace">
+    </item>
+    <item android:id="@+id/resetAction"
+        android:title="@string/reset_action"
+        android:onClick="resetAction">
+    </item>
+</menu>

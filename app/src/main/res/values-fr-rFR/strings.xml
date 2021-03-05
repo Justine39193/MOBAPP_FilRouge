@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">InitiationAndroid</string>
+
+    <string name="title">Informations</string>
+    <string name="introText">Renseigner les informations demandées dans les champs associés.</string>
+    <string name="validate">Valider</string>
+    <string name="registered">Vos infos sont : </string>
+    <string name="allNumbers">Vos numéro(s) de téléphone : </string>
+    <string name="dismiss">FERMER</string>
+    <string name="phone">Numéro(s) de téléphone</string>
+    <string name="edit">CHANGER</string>
+
+    <string name="lastname">Nom : </string>
+    <string name="firstname">Prénom : </string>
+    <string name="birthDate">Date de naissance : </string>
+    <string name="birthPlace">Ville de naissance : </string>
+    <string name="dept">Département : </string>
+
+    <string name="phoneNb">Numéro : </string>
+    <string name="samplePhone">0123456789</string>
+    <string name="addPhone">AJOUTER</string>
+    <string name="delPhone">SUPPR</string>
+
+    <string name="sampleLastname">Marchand</string>
+    <string name="sampleFirstname">Camille</string>
+    <string name="sampleDate">JJ/MM/AAAA</string>
+    <string name="samplePlace">Paris</string>
+    <string name="selectDpt">Selectionner département</string>
+
+    <string name="reset_action">Réinitialiser</string>
+    <string name="wiki_search">Rechercher votre ville (Wikipedia)</string>
+    <string name="share_town">Partager votre ville</string>
+    <string name="shareMsg">Le saviez-vous ? Je suis né(e) à </string>
+    <string name="shareChooser">Partager votre ville avec :</string>
+
+    <string name="errorTitle">Oups !</string>
+    <string name="wikiError">Il semble que l\'application n\'ait réussi à ouvrir aucun navigateur Internet...</string>
+    <string name="shareError">Il semble que l\'application n\'ait pas réussi à partager votre message...</string>
+    <string name="warningTitle">Hey !</string>
+    <string name="noPlaceWarning">Vous devez avoir renseigné une ville pour la partager.</string>
+    <string name="missingItem">Vous devez remplir tous les champs avant de valider !</string>
+    <string name="dialError">Il semblerait que l\'application n\'ait pas réussi à composer le numéro...</string>
+
+    <string name="displayTitle">Votre profil</string>
+    <string name="displayIntro">Voici les informations que vous avez renseignées.</string>
+    <string name="noPhone">Aucun numéro enregistré</string>
+    <string name="viewLast">Voir</string>
+    <string name="editFirst">Éditer</string>
+    <string name="dialNb">Composer</string>
+    <string name="call">Appeler</string>
+    <string name="viewLastActivity">Votre nom de famille</string>
+    <string name="editFirstActivity">Éditez votre prénom</string>
+    <string name="dialNbActivity">Composer ce numéro</string>
+
+    <string name="validateDate">Valider la date</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Annuler</string>
+    <string name="pickDateActivity">Sélectionner une date</string>
+</resources>

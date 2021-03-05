@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DialActivity"
+    android:id="@+id/dialLayout">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/phoneNb"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="20sp"/>
+
+    <TextView
+        android:id="@+id/phoneNb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/samplePhone"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:padding="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="20sp">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:text="@string/call"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginRight="20sp"
+            android:onClick="callNb"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:text="@string/cancel"
+            android:textSize="15sp"
+            android:background="#ff0000"
+            android:textColor="@color/white"
+            android:layout_marginLeft="20sp"
+            android:textStyle="bold"
+            android:onClick="cancelDial"/>
+    </LinearLayout>
+
+
+</LinearLayout>

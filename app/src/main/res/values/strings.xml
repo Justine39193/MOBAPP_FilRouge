@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">InitiationAndroid</string>
+
+    <string name="title">Information</string>
+    <string name="introText">Register your information in the associated fields.</string>
+    <string name="validate">Validate</string>
+    <string name="registered">Your infos are: </string>
+    <string name="allNumbers">Your phone number(s): </string>
+    <string name= "dismiss">DISMISS</string>
+    <string name="phone">Phone number(s)</string>
+    <string name="edit">EDIT</string>
+
+    <string name="lastname">Lastname: </string>
+    <string name="firstname">Firstname: </string>
+    <string name="birthDate">Birth date: </string>
+    <string name="birthPlace">Birth town: </string>
+    <string name="dept">Department: </string>
+
+    <string name="phoneNb">Phone No.: </string>
+    <string name="samplePhone">0123456789</string>
+    <string name="addPhone">ADD</string>
+    <string name="delPhone">DEL</string>
+
+    <string name="sampleLastname">Doe</string>
+    <string name="sampleFirstname">Max</string>
+    <string name="sampleDate">DD/MM/YYYY</string>
+    <string name="samplePlace">London</string>
+    <string name="selectDpt">Select department</string>
+
+    <string name="reset_action">Reset</string>
+    <string name="wiki_search">Search for your town (Wikipedia)</string>
+    <string name="share_town">Share your town</string>
+    <string name="shareMsg">Did you know? I was born in</string>
+    <string name="shareChooser">Share your town with:</string>
+
+    <string name="errorTitle">Oops!</string>
+    <string name="wikiError">It seems that the app couldn\'t open any Internet browser...</string>
+    <string name="shareError">It seems that the app couldn\'t share your message..</string>
+    <string name="warningTitle">Hey!</string>
+    <string name="noPlaceWarning">You must have registered a town to share it.</string>
+    <string name="missingItem">You should fill every fields before validating!</string>
+    <string name="dialError">It seems that the app couldn\'t dial this number...</string>
+
+    <string name="displayTitle">Your profile</string>
+    <string name="displayIntro">Here are the info you have registered.</string>
+    <string name="noPhone">No phone number registered</string>
+    <string name="viewLast">View</string>
+    <string name="editFirst">Edit</string>
+    <string name="dialNb">Dial</string>
+    <string name="call">Call</string>
+    <string name="viewLastActivity">Your lastname</string>
+    <string name="editFirstActivity">Edit your firstname</string>
+    <string name="dialNbActivity">Dial this number</string>
+
+    <string name="validateDate">Validate the date</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="pickDateActivity">Pick a date</string>
+
+</resources>
