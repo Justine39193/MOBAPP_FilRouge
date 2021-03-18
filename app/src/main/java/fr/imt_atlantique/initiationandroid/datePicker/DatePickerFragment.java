@@ -1,4 +1,4 @@
-package fr.imt_atlantique.initiationandroid;
+package fr.imt_atlantique.initiationandroid.datePicker;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;

@@ -23,6 +23,7 @@
         android:padding="10dp"/>
 
     <Button
+        android:id="@+id/delNumber"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ff0000"

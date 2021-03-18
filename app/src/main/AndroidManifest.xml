@@ -26,28 +26,28 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".DateActivity" android:label="@string/pickDateActivity">
+        <activity android:name=".datePicker.DateActivity" android:label="@string/pickDateActivity">
             <intent-filter>
                 <action android:name="android.intent.action.PICK" />
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 
-        <activity android:name=".ViewActivity" android:label="@string/viewLastActivity">
+        <activity android:name=".displayIntents.ViewActivity" android:label="@string/viewLastActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 
-        <activity android:name=".EditActivity" android:label="@string/editFirstActivity">
+        <activity android:name=".displayIntents.EditActivity" android:label="@string/editFirstActivity">
             <intent-filter>
                 <action android:name="android.intent.action.EDIT"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 
-        <activity android:name=".DialActivity" android:label="@string/dialNbActivity">
+        <activity android:name=".displayIntents.DialActivity" android:label="@string/dialNbActivity">
             <intent-filter>
                 <action android:name="android.intent.action.DIAL"/>
                 <category android:name="android.intent.category.DEFAULT"/>

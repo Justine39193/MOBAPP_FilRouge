@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".InputPhoneFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phone"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:layout_marginTop="25sp"/>
+
+        <LinearLayout
+            android:id="@+id/phoneLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:scrollbars="vertical">
+            <LinearLayout
+                android:id="@+id/addNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/phoneNb"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:padding="10dp"/>
+                <Button
+                    android:id="@+id/addNumberBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/addPhone"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </LinearLayout>
+</LinearLayout>

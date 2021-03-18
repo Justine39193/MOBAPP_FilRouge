@@ -1,4 +1,4 @@
-package fr.imt_atlantique.initiationandroid;
+package fr.imt_atlantique.initiationandroid.displayIntents;
 
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import fr.imt_atlantique.initiationandroid.R;
 
 public class DialActivity extends AppCompatActivity {
 

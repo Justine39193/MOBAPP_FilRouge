@@ -1,197 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:scrollbars="vertical"
     tools:context=".MainActivity"
     android:id="@+id/mainLayout">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent"
-        android:isScrollContainer="true">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/validateButton"
+        app:layout_constraintVertical_weight="0.1">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title"
-            android:textStyle="bold"
-            android:textSize="30sp"
-            android:padding="10dp"/>
+        <fragment
+            android:id="@+id/inputInfoFrag"
+            class="fr.imt_atlantique.initiationandroid.InputInfoFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/inputPhoneFrag"
+            app:layout_constraintHorizontal_weight="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout="@layout/fragment_input_info" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/introText"
-            android:textStyle="italic"
-            android:textSize="15sp"
-            android:padding="10dp"
-            android:layout_marginBottom="20dp"/>
+        <fragment
+            android:id="@+id/inputPhoneFrag"
+            class="fr.imt_atlantique.initiationandroid.InputPhoneFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="0.5"
+            app:layout_constraintStart_toEndOf="@id/inputInfoFrag"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout="@layout/fragment_input_phone" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/lastname"
-                android:textStyle="bold"
-                android:textSize="15sp"
-                android:padding="10dp"/>
-            <EditText
-                android:id="@+id/lastname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="@string/sampleLastname"
-                android:textSize="15sp"
-                android:maxEms="10"
-                android:minEms="2"/>
-        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/firstname"
-                android:textStyle="bold"
-                android:textSize="15sp"
-                android:padding="10dp"/>
-            <EditText
-                android:id="@+id/firstname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="@string/sampleFirstname"
-                android:textSize="15sp"
-                android:maxEms="10"
-                android:minEms="2"/>
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/birthDate"
-                android:textStyle="bold"
-                android:textSize="15sp"
-                android:padding="10dp" />
-            <TextView
-                android:id="@+id/birthDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sampleDate"
-                android:textSize="15sp"
-                android:padding="10dp" />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:text="@string/edit"
-                android:onClick="setBirthDate"/>
-        </LinearLayout>
+    <Button
+        android:id="@+id/validateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/validate"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:padding="20dp"
+        android:onClick="validate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_weight="0.9"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/birthPlace"
-                android:textStyle="bold"
-                android:textSize="15sp"
-                android:padding="10dp"/>
-            <EditText
-                android:id="@+id/birthPlace"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="@string/samplePlace"
-                android:textSize="15sp"
-                android:maxEms="10"
-                android:minEms="2"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:padding="10dp"
-                android:text="@string/dept"/>
-            <Spinner
-                android:id="@+id/dept"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/departments"
-                android:spinnerMode="dialog"/>
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/phone"
-            android:textStyle="bold"
-            android:textSize="30sp"
-            android:padding="10dp"/>
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="150dp">
-            <LinearLayout
-                android:id="@+id/phoneLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:scrollbars="vertical">
-                <LinearLayout
-                    android:id="@+id/addNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/phoneNb"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
-                        android:padding="10dp"/>
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/addPhone"
-                        android:layout_marginLeft="20dp"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:onClick="addNumber"/>
-                </LinearLayout>
-            </LinearLayout>
-        </ScrollView>
-
-        <Button
-            android:id="@+id/validateButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/validate"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:layout_marginTop="20dp"
-            android:padding="20dp"/>
-    </LinearLayout>
-
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

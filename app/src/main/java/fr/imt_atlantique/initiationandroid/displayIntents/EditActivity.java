@@ -1,4 +1,4 @@
-package fr.imt_atlantique.initiationandroid;
+package fr.imt_atlantique.initiationandroid.displayIntents;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,9 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import fr.imt_atlantique.initiationandroid.R;
+
 public class EditActivity extends AppCompatActivity {
 
-    static final int EDITFIRST = 2;
+    public static final int EDITFIRST = 2;
 
     private TextView mFirst;
 

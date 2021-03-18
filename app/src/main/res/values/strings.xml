@@ -6,7 +6,7 @@
     <string name="validate">Validate</string>
     <string name="registered">Your infos are: </string>
     <string name="allNumbers">Your phone number(s): </string>
-    <string name= "dismiss">DISMISS</string>
+    <string name="dismiss">DISMISS</string>
     <string name="phone">Phone number(s)</string>
     <string name="edit">EDIT</string>
 

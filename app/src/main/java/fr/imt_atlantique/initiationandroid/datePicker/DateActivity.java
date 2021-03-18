@@ -1,4 +1,4 @@
-package fr.imt_atlantique.initiationandroid;
+package fr.imt_atlantique.initiationandroid.datePicker;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import fr.imt_atlantique.initiationandroid.MainActivity;
+import fr.imt_atlantique.initiationandroid.R;
 
 public class DateActivity extends AppCompatActivity {
 

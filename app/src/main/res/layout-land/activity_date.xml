@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     android:padding="20sp"
-    tools:context=".DateActivity"
+    tools:context=".datePicker.DateActivity"
     android:id="@+id/dateLayout">
 
     <TextView
