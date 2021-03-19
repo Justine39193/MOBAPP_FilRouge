@@ -4,11 +4,14 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -68,7 +71,7 @@ public class InputPhoneFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_input_phone, container, false);
-        mPhoneLayout = (LinearLayout) rootView.findViewById(R.id.addNumber);
+        mPhoneLayout = (LinearLayout) rootView.findViewById(R.id.phoneLayout);
         mAddNumber = (LinearLayout) rootView.findViewById(R.id.addNumber);
         mAddNumberBtn = (Button) rootView.findViewById(R.id.addNumberBtn);
 
@@ -76,7 +79,7 @@ public class InputPhoneFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //Add a new layout by inflating it (and retrieving the pre-created layout)
-                LayoutInflater inflater = (LayoutInflater) rootActivity.getSystemService(rootActivity.LAYOUT_INFLATER_SERVICE);
+//                LayoutInflater inflater = (LayoutInflater) rootActivity.getSystemService(rootActivity.LAYOUT_INFLATER_SERVICE);
                 LinearLayout phoneView = (LinearLayout) inflater.inflate(R.layout.phone_number, null);
                 mPhoneLayout.addView(phoneView, mPhoneLayout.getChildCount() - 1);
                 Button delBtn = phoneView.findViewById(R.id.delNumber);
@@ -89,6 +92,12 @@ public class InputPhoneFragment extends Fragment {
             }
         });
         return rootView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
     }
 
     @Override
@@ -129,15 +138,25 @@ public class InputPhoneFragment extends Fragment {
         super.onViewStateRestored(savedInstanceState);
 
         mPhoneLayout.removeAllViews();
+
+//        mAddNumber.removeAllViews();
+        if(mAddNumber.getParent() != null)
+        {
+//            ((ViewGroup) mAddNumber.getParent()).removeView(mAddNumber);
+            Log.i("Parent","Parent is : "+mAddNumber.getParent().toString());
+        }
+
         mPhoneLayout.addView(mAddNumber,0);
 
-        String[] phoneArray = savedInstanceState.getStringArray(PHONEARRAY);
-        for(int i = 0; i < phoneArray.length; i++){
-            LayoutInflater inflater = (LayoutInflater) rootActivity.getSystemService(rootActivity.LAYOUT_INFLATER_SERVICE);
-            LinearLayout phoneView = (LinearLayout) inflater.inflate(R.layout.phone_number, null);
-            mPhoneLayout.addView(phoneView, mPhoneLayout.getChildCount() - 1);
-            TextView currentNumber = (TextView) phoneView.findViewById(R.id.newNumber);
-            currentNumber.setText(phoneArray[i]);
+        if(savedInstanceState != null) {
+            String[] phoneArray = savedInstanceState.getStringArray(PHONEARRAY);
+            for (int i = 0; i < phoneArray.length; i++) {
+                LayoutInflater inflater = (LayoutInflater) rootActivity.getSystemService(rootActivity.LAYOUT_INFLATER_SERVICE);
+                LinearLayout phoneView = (LinearLayout) inflater.inflate(R.layout.phone_number, null);
+                mPhoneLayout.addView(phoneView, mPhoneLayout.getChildCount() - 1);
+                TextView currentNumber = (TextView) phoneView.findViewById(R.id.newNumber);
+                currentNumber.setText(phoneArray[i]);
+            }
         }
 
     }

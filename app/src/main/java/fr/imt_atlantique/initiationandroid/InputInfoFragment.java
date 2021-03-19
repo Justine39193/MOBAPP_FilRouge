@@ -153,11 +153,12 @@ public class InputInfoFragment extends Fragment {
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
+        if(savedInstanceState!=null){
         mLast.setText(savedInstanceState.getString(LASTNAME));
         mFirst.setText(savedInstanceState.getString(FIRSTNAME));
         mDate.setText(savedInstanceState.getString(BIRTHDATE));
         mPlace.setText(savedInstanceState.getString(BIRTHPLACE));
-        mDept.setSelection(savedInstanceState.getInt(DEPT));
+        mDept.setSelection(savedInstanceState.getInt(DEPT));}
     }
 
     public Boolean isCompleted(){
