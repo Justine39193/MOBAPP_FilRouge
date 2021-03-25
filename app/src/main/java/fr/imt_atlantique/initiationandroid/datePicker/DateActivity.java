@@ -1,5 +1,6 @@
 package fr.imt_atlantique.initiationandroid.datePicker;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,13 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import fr.imt_atlantique.initiationandroid.InputInfoFragment;
 import fr.imt_atlantique.initiationandroid.MainActivity;
 import fr.imt_atlantique.initiationandroid.R;
 
 public class DateActivity extends AppCompatActivity {
 
-    static final int RESULT_OK = 1;
-    static final int RESULT_CANCEL = 0;
     private Bundle intentData;
 
     private DatePicker mDatePicker;
@@ -52,16 +52,16 @@ public class DateActivity extends AppCompatActivity {
 
 
     public void okDate(View view) {
-        Intent backIntent = new Intent(this, MainActivity.class);
+        Intent backIntent = new Intent(this, InputInfoFragment.class);
         backIntent.putExtra("day", mDay);
         backIntent.putExtra("month", mMonth);
         backIntent.putExtra("year", mYear);
-        setResult(RESULT_OK, backIntent);
+        setResult(Activity.RESULT_OK, backIntent);
         finish();
     }
 
     public void cancelDate(View view) {
-        setResult(RESULT_CANCEL);
+        setResult(Activity.RESULT_CANCELED);
         finish();
     }
 

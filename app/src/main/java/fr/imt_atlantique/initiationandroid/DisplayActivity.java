@@ -10,102 +10,117 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import fr.imt_atlantique.initiationandroid.displayIntents.EditActivity;
+import fr.imt_atlantique.initiationandroid.displayIntents.EditFragment;
 
-public class DisplayActivity extends AppCompatActivity {
+public class DisplayActivity extends AppCompatActivity implements EditFragment.OnEditInterface, DisplayFragment.OnActionInterface {
 
     static final String USER = "user";
     private User mUser;
 
-    private TextView mLast;
-    private TextView mFirst;
-    private TextView mDate;
-    private TextView mPlace;
-    private TextView mDept;
-    private LinearLayout mPhoneLayout;
-    private String[] mPhones;
+    private FragmentTransaction ft;
+
+    private DisplayFragment displayFrag;
+    private EditFragment editFrag;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
 
-        Bundle data = getIntent().getExtras();
-        mUser = (User) data.getParcelable(USER);
-        Log.i("Display", "User's lastname is: " + mUser.getUserLast());
 
-        mLast = (TextView) findViewById(R.id.userLast);
-        mFirst = (TextView) findViewById(R.id.userFirst);
-        mDate = (TextView) findViewById(R.id.userDate);
-        mPlace = (TextView) findViewById(R.id.userPlace);
-        mDept = (TextView) findViewById(R.id.userDept);
-        mPhoneLayout = (LinearLayout) findViewById(R.id.phoneLayout);
-
-        mLast.setText(mUser.getUserLast());
-        mFirst.setText(mUser.getUserFirst());
-        mDate.setText(mUser.getUserDate());
-        mPlace.setText(mUser.getUserPlace());
-        mDept.setText(mUser.getUserDept());
-
-        mPhones = mUser.getUserPhones();
-        if(mPhones.length > 0) {
-            mPhoneLayout.removeAllViews();
-            if (mPhones.length != 0) {
-                for (int i = 0; i < mPhones.length; i++) {
-                    LayoutInflater inflater = (LayoutInflater) getSystemService(this.LAYOUT_INFLATER_SERVICE);
-                    LinearLayout phoneView = (LinearLayout) inflater.inflate(R.layout.number_layout, null);
-                    mPhoneLayout.addView(phoneView);
-                    TextView phoneNb = (TextView) phoneView.findViewById(R.id.userPhone);
-                    phoneNb.setText(mPhones[i]);
-                    Button dialBtn = (Button) phoneView.findViewById(R.id.dialBtn);
-                    dialBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Log.i("Display", phoneNb.getText().toString());
-                            Intent dialIntent = new Intent();
-                            dialIntent.setAction(Intent.ACTION_DIAL);
-                            dialIntent.putExtra("phone", phoneNb.getText().toString());
-                            startActivity(dialIntent);
-                        }
-                    });
-                }
+        displayFrag = new DisplayFragment();
+        editFrag = new EditFragment();
+        if(savedInstanceState != null){
+            displayFrag = DisplayFragment.newInstance(savedInstanceState.getString(InputInfoFragment.LASTNAME),
+                    savedInstanceState.getString(InputInfoFragment.FIRSTNAME), savedInstanceState.getString(InputInfoFragment.BIRTHDATE),
+                    savedInstanceState.getString(InputInfoFragment.BIRTHPLACE), savedInstanceState.getString(InputInfoFragment.DEPT),
+                    savedInstanceState.getStringArray(InputPhoneFragment.PHONEARRAY));
+            editFrag = EditFragment.newInstance(savedInstanceState.getString(InputInfoFragment.FIRSTNAME));
+            if(displayFrag.isAdded()){
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.remove(editFrag);
+                ft.add(R.id.displayLayout, displayFrag);
+                ft.commit();
+            }
+            else if(editFrag.isAdded()){
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.remove(displayFrag);
+                ft.add(R.id.displayLayout, editFrag);
+                ft.commit();
             }
         }
 
-    }
+        else{
+            Bundle data = getIntent().getExtras();
+            mUser = (User) data.getParcelable(USER);
+            Log.i("Display", "DisplayActivity: User's lastname is: " + mUser.getUserLast());
+            displayFrag = DisplayFragment.newInstance(mUser.getUserLast(), mUser.getUserFirst(), mUser.getUserDate(),
+                    mUser.getUserPlace(), mUser.getUserDept(), mUser.getUserPhones());
+            ft = getSupportFragmentManager().beginTransaction();
+            ft.add(R.id.displayLayout, displayFrag);
+            ft.commit();
+        }
 
-    public void viewLast(View view){
-        Intent viewIntent = new Intent();
-        viewIntent.setAction(Intent.ACTION_VIEW);
-        viewIntent.putExtra("last", mLast.getText().toString());
-        startActivity(viewIntent);
-    }
 
-    public void editFirst(View view){
-        Intent editIntent = new Intent();
-        editIntent.setAction(Intent.ACTION_EDIT);
-        editIntent.putExtra("first", mFirst.getText().toString());
-        startActivityForResult(editIntent, EditActivity.EDITFIRST);
-    }
-
-    public void dialNumber(View view) {
-        Log.i("Display", "display");
-        TextView phoneNb = (TextView) view.findViewById(R.id.userPhone);
-        Log.i("Display", phoneNb.getText().toString());
-        Intent dialIntent = new Intent();
-        dialIntent.setAction(Intent.ACTION_DIAL);
-        dialIntent.putExtra("phone", phoneNb.getText().toString());
-        startActivity(dialIntent);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == EditActivity.EDITFIRST & resultCode == Activity.RESULT_OK){
-            mFirst.setText(data.getExtras().getString("first"));
-        }
+    public void onViewLast(String last) {
+
+    }
+
+    @Override
+    public void onEditFirst(String first) {
+        editFrag = EditFragment.newInstance(first);
+        ft = getSupportFragmentManager().beginTransaction();
+        ft.remove(displayFrag);
+        ft.add(R.id.displayLayout, editFrag);
+        ft.commit();
+    }
+
+    @Override
+    public void onDialNumber(String number) {
+
+    }
+
+    @Override
+    public void onEditOk(String name) {
+        displayFrag = DisplayFragment.newInstance(mUser.getUserLast(), name, mUser.getUserDate(),
+                mUser.getUserPlace(), mUser.getUserDept(), mUser.getUserPhones());
+        ft = getSupportFragmentManager().beginTransaction();
+        ft.remove(editFrag);
+        ft.add(R.id.displayLayout, displayFrag);
+        ft.commit();
+    }
+
+    @Override
+    public void onEditCancel() {
+        ft = getSupportFragmentManager().beginTransaction();
+        ft.remove(editFrag);
+        ft.add(R.id.displayLayout, displayFrag);
+        ft.commit();
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        displayFrag.onSaveInstanceState(outState);
+        editFrag.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        displayFrag.onViewStateRestored(savedInstanceState);
+        editFrag.onViewStateRestored(savedInstanceState);
     }
 }

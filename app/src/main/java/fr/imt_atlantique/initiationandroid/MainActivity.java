@@ -1,11 +1,14 @@
 package fr.imt_atlantique.initiationandroid;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.collection.ArraySet;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.DatePickerDialog;
 import android.app.SearchManager;
@@ -25,6 +28,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -56,8 +60,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mValidate = (Button) findViewById(R.id.validateButton);
 
-        infoFrag = (InputInfoFragment) getSupportFragmentManager().findFragmentById(R.id.inputInfoFrag);
-        phoneFrag = (InputPhoneFragment) getSupportFragmentManager().findFragmentById(R.id.inputPhoneFrag);
+        if(savedInstanceState != null){
+            infoFrag = InputInfoFragment.newInstance(savedInstanceState.getString(InputInfoFragment.LASTNAME),
+                    savedInstanceState.getString(InputInfoFragment.FIRSTNAME),
+                    savedInstanceState.getString(InputInfoFragment.BIRTHDATE),
+                    savedInstanceState.getString(InputInfoFragment.BIRTHPLACE),
+                    savedInstanceState.getInt(InputInfoFragment.DEPT));
+            phoneFrag = InputPhoneFragment.newInstance(savedInstanceState.getStringArray(InputPhoneFragment.PHONEARRAY));
+        }
+        else{
+            infoFrag = new InputInfoFragment();
+            phoneFrag = new InputPhoneFragment();
+
+        }
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.add(R.id.fragLayout, infoFrag);
+        ft.add(R.id.fragLayout, phoneFrag);
+        ft.commit();
 
 
         Log.i("Lifecycle", "onCreate method");
@@ -230,4 +250,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        infoFrag.onSaveInstanceState(outState);
+        phoneFrag.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState != null){
+            infoFrag.onViewStateRestored(savedInstanceState);
+            phoneFrag.onViewStateRestored(savedInstanceState);
+        }
+
+    }
 }

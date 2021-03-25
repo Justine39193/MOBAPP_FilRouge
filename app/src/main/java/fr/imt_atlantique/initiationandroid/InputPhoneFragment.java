@@ -54,15 +54,21 @@ public class InputPhoneFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        setRetainInstance(true);
+
+        if (savedInstanceState != null) {
             String[] phoneArray = savedInstanceState.getStringArray(PHONEARRAY);
-            for(int i = 0; i < phoneArray.length; i++) {
-                LayoutInflater inflater = (LayoutInflater) rootActivity.getSystemService(rootActivity.LAYOUT_INFLATER_SERVICE);
-                LinearLayout phoneView = (LinearLayout) inflater.inflate(R.layout.phone_number, null);
-                mPhoneLayout.addView(phoneView, mPhoneLayout.getChildCount() - 1);
-                TextView currentNumber = (TextView) phoneView.findViewById(R.id.newNumber);
-                currentNumber.setText(phoneArray[i]);
+            if(phoneArray.length > 0){
+                resetPhones();
+                for(int i = 0; i < phoneArray.length; i++) {
+                    LayoutInflater inflater = (LayoutInflater) rootActivity.getSystemService(rootActivity.LAYOUT_INFLATER_SERVICE);
+                    LinearLayout phoneView = (LinearLayout) inflater.inflate(R.layout.phone_number, null);
+                    mPhoneLayout.addView(phoneView, mPhoneLayout.getChildCount() - 1);
+                    TextView currentNumber = (TextView) phoneView.findViewById(R.id.newNumber);
+                    currentNumber.setText(phoneArray[i]);
+                }
             }
+
         }
     }
 
@@ -71,15 +77,35 @@ public class InputPhoneFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_input_phone, container, false);
+        return rootView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         mPhoneLayout = (LinearLayout) rootView.findViewById(R.id.phoneLayout);
         mAddNumber = (LinearLayout) rootView.findViewById(R.id.addNumber);
         mAddNumberBtn = (Button) rootView.findViewById(R.id.addNumberBtn);
 
+        if (savedInstanceState != null) {
+            String[] phoneArray = savedInstanceState.getStringArray(PHONEARRAY);
+            if(phoneArray.length > 0){
+                resetPhones();
+                for(int i = 0; i < phoneArray.length; i++) {
+                    LayoutInflater inflater = (LayoutInflater) rootActivity.getSystemService(rootActivity.LAYOUT_INFLATER_SERVICE);
+                    LinearLayout phoneView = (LinearLayout) inflater.inflate(R.layout.phone_number, null);
+                    mPhoneLayout.addView(phoneView, mPhoneLayout.getChildCount() - 1);
+                    TextView currentNumber = (TextView) phoneView.findViewById(R.id.newNumber);
+                    currentNumber.setText(phoneArray[i]);
+                }
+            }
+
+        }
         mAddNumberBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Add a new layout by inflating it (and retrieving the pre-created layout)
-//                LayoutInflater inflater = (LayoutInflater) rootActivity.getSystemService(rootActivity.LAYOUT_INFLATER_SERVICE);
+                LayoutInflater inflater = (LayoutInflater) rootActivity.getSystemService(rootActivity.LAYOUT_INFLATER_SERVICE);
                 LinearLayout phoneView = (LinearLayout) inflater.inflate(R.layout.phone_number, null);
                 mPhoneLayout.addView(phoneView, mPhoneLayout.getChildCount() - 1);
                 Button delBtn = phoneView.findViewById(R.id.delNumber);
@@ -91,18 +117,12 @@ public class InputPhoneFragment extends Fragment {
                 });
             }
         });
-        return rootView;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+        rootActivity = (MainActivity) getActivity();
     }
 
     public String[] phoneToArray(LinearLayout layout){
@@ -110,7 +130,9 @@ public class InputPhoneFragment extends Fragment {
         String[] phoneArray = new String[childCount];
         for(int i = 0; i< childCount; i++){
             TextView text = (TextView) layout.getChildAt(i).findViewById(R.id.newNumber);
-            phoneArray[i] = text.getText().toString();
+            if(text.getText().length() != 0) {
+                phoneArray[i] = text.getText().toString();
+            }
         }
 
         return  phoneArray;
@@ -136,28 +158,7 @@ public class InputPhoneFragment extends Fragment {
     @Override
     public void onViewStateRestored(Bundle savedInstanceState){
         super.onViewStateRestored(savedInstanceState);
-
-        mPhoneLayout.removeAllViews();
-
-//        mAddNumber.removeAllViews();
-        if(mAddNumber.getParent() != null)
-        {
-//            ((ViewGroup) mAddNumber.getParent()).removeView(mAddNumber);
-            Log.i("Parent","Parent is : "+mAddNumber.getParent().toString());
-        }
-
-        mPhoneLayout.addView(mAddNumber,0);
-
-        if(savedInstanceState != null) {
-            String[] phoneArray = savedInstanceState.getStringArray(PHONEARRAY);
-            for (int i = 0; i < phoneArray.length; i++) {
-                LayoutInflater inflater = (LayoutInflater) rootActivity.getSystemService(rootActivity.LAYOUT_INFLATER_SERVICE);
-                LinearLayout phoneView = (LinearLayout) inflater.inflate(R.layout.phone_number, null);
-                mPhoneLayout.addView(phoneView, mPhoneLayout.getChildCount() - 1);
-                TextView currentNumber = (TextView) phoneView.findViewById(R.id.newNumber);
-                currentNumber.setText(phoneArray[i]);
-            }
-        }
+        onViewCreated(rootView, savedInstanceState);
 
     }
 }

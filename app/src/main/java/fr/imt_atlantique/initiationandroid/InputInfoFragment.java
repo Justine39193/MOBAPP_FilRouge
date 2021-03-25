@@ -25,12 +25,12 @@ import java.util.Calendar;
  */
 public class InputInfoFragment extends Fragment {
 
-    static final String LASTNAME ="prefLast";
-    static final String FIRSTNAME = "prefFirst";
-    static final String BIRTHDATE = "prefDate";
-    static final String BIRTHPLACE = "prefPlace";
-    static final String DEPT = "prefDept";
-    static final int DATE_ACTIVITY = 0;
+    public static final String LASTNAME ="prefLast";
+    public static final String FIRSTNAME = "prefFirst";
+    public static final String BIRTHDATE = "prefDate";
+    public static final String BIRTHPLACE = "prefPlace";
+    public static final String DEPT = "prefDept";
+    public static final int DATE_ACTIVITY = 0;
 
     private TextView mLast;
     private TextView mFirst;
@@ -77,8 +77,9 @@ public class InputInfoFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
 
-        if (getArguments() != null) {
+        if (savedInstanceState != null) {
             mLast.setText(savedInstanceState.getString(LASTNAME));
             mFirst.setText(savedInstanceState.getString(FIRSTNAME));
             mDate.setText(savedInstanceState.getString(BIRTHDATE));
@@ -143,22 +144,17 @@ public class InputInfoFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putCharSequence(LASTNAME, mLast.getText());
-        outState.putCharSequence(FIRSTNAME, mFirst.getText());
-        outState.putCharSequence(BIRTHDATE, mDate.getText());
-        outState.putCharSequence(BIRTHPLACE, mPlace.getText());
+        outState.putString(LASTNAME, mLast.getText().toString());
+        outState.putString(FIRSTNAME, mFirst.getText().toString());
+        outState.putString(BIRTHDATE, mDate.getText().toString());
+        outState.putString(BIRTHPLACE, mPlace.getText().toString());
         outState.putInt(DEPT, mDept.getSelectedItemPosition());
     }
 
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
-        if(savedInstanceState!=null){
-        mLast.setText(savedInstanceState.getString(LASTNAME));
-        mFirst.setText(savedInstanceState.getString(FIRSTNAME));
-        mDate.setText(savedInstanceState.getString(BIRTHDATE));
-        mPlace.setText(savedInstanceState.getString(BIRTHPLACE));
-        mDept.setSelection(savedInstanceState.getInt(DEPT));}
+        onViewCreated(rootView, savedInstanceState);
     }
 
     public Boolean isCompleted(){
