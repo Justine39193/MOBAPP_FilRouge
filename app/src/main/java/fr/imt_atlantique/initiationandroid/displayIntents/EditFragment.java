@@ -59,6 +59,7 @@ public class EditFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         if (savedInstanceState != null) {
             mFirst.setText(savedInstanceState.getString(InputInfoFragment.FIRSTNAME));
         }
@@ -120,7 +121,10 @@ public class EditFragment extends Fragment {
     }
 
     public void setFirstToEdit(String first){
-        mFirst.setText(first);
+        if (mFirst != null){
+            mFirst.setText(first);
+        }
+
     }
 
     public String getFirstToEdit(){ return mFirst.getText().toString(); }

@@ -68,10 +68,9 @@ public class MainActivity extends AppCompatActivity {
                     savedInstanceState.getInt(InputInfoFragment.DEPT));
             phoneFrag = InputPhoneFragment.newInstance(savedInstanceState.getStringArray(InputPhoneFragment.PHONEARRAY));
         }
-        else{
+        else if (savedInstanceState == null){
             infoFrag = new InputInfoFragment();
             phoneFrag = new InputPhoneFragment();
-
         }
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();

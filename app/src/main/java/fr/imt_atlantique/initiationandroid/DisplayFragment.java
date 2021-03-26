@@ -78,6 +78,7 @@ public class DisplayFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         if (savedInstanceState != null) {
             mLast.setText(savedInstanceState.getString(InputInfoFragment.LASTNAME));
             mFirst.setText(savedInstanceState.getString(InputInfoFragment.FIRSTNAME));
@@ -155,7 +156,7 @@ public class DisplayFragment extends Fragment {
             mPlace.setText(args.getString(InputInfoFragment.BIRTHPLACE));
             mDept.setText(args.getString(InputInfoFragment.DEPT));
             mPhones = args.getStringArray(InputPhoneFragment.PHONEARRAY);
-            if (mPhones.length > 0) {
+            if (mPhones != null && mPhones.length > 0) {
                 mPhoneLayout.removeAllViews();
                 if (mPhones.length != 0) {
                     for (int i = 0; i < mPhones.length; i++) {
@@ -208,16 +209,19 @@ public class DisplayFragment extends Fragment {
         }
     }
 
-    @Override
+    /*@Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == EditActivity.EDITFIRST & resultCode == Activity.RESULT_OK){
             mFirst.setText(data.getExtras().getString("first"));
         }
-    }
+    }*/
 
     public void setFirst(String name){
-        mFirst.setText(name);
+        if(mFirst != null){
+            mFirst.setText(name);
+        }
+
     }
 
     public String  getFirst(){ return mFirst.getText().toString(); }

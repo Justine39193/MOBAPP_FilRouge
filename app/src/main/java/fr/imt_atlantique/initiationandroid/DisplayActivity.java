@@ -47,22 +47,21 @@ public class DisplayActivity extends AppCompatActivity implements EditFragment.O
             editFrag = EditFragment.newInstance(savedInstanceState.getString(InputInfoFragment.FIRSTNAME));
             if(displayFrag.isAdded()){
                 ft = getSupportFragmentManager().beginTransaction();
-                ft.remove(editFrag);
-                ft.add(R.id.displayLayout, displayFrag);
+                ft.replace(R.id.displayLayout, displayFrag);
                 ft.commit();
             }
             else if(editFrag.isAdded()){
                 ft = getSupportFragmentManager().beginTransaction();
-                ft.remove(displayFrag);
-                ft.add(R.id.displayLayout, editFrag);
+                ft.replace(R.id.displayLayout, editFrag);
                 ft.commit();
             }
         }
 
-        else{
+        else if (savedInstanceState == null){
             Bundle data = getIntent().getExtras();
             mUser = (User) data.getParcelable(USER);
             Log.i("Display", "DisplayActivity: User's lastname is: " + mUser.getUserLast());
+            editFrag = EditFragment.newInstance(mUser.getUserFirst());
             displayFrag = DisplayFragment.newInstance(mUser.getUserLast(), mUser.getUserFirst(), mUser.getUserDate(),
                     mUser.getUserPlace(), mUser.getUserDept(), mUser.getUserPhones());
             ft = getSupportFragmentManager().beginTransaction();
@@ -82,8 +81,8 @@ public class DisplayActivity extends AppCompatActivity implements EditFragment.O
     public void onEditFirst(String first) {
         editFrag = EditFragment.newInstance(first);
         ft = getSupportFragmentManager().beginTransaction();
-        ft.remove(displayFrag);
-        ft.add(R.id.displayLayout, editFrag);
+        ft.replace(R.id.displayLayout, editFrag);
+        ft.addToBackStack(editFrag.getClass().toString());
         ft.commit();
     }
 
@@ -97,30 +96,51 @@ public class DisplayActivity extends AppCompatActivity implements EditFragment.O
         displayFrag = DisplayFragment.newInstance(mUser.getUserLast(), name, mUser.getUserDate(),
                 mUser.getUserPlace(), mUser.getUserDept(), mUser.getUserPhones());
         ft = getSupportFragmentManager().beginTransaction();
-        ft.remove(editFrag);
-        ft.add(R.id.displayLayout, displayFrag);
+        ft.replace(R.id.displayLayout, displayFrag);
+        ft.addToBackStack(displayFrag.getClass().toString());
         ft.commit();
     }
 
     @Override
     public void onEditCancel() {
         ft = getSupportFragmentManager().beginTransaction();
-        ft.remove(editFrag);
-        ft.add(R.id.displayLayout, displayFrag);
+        ft.replace(R.id.displayLayout, displayFrag);
+        ft.addToBackStack(displayFrag.getClass().toString());
         ft.commit();
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        displayFrag.onSaveInstanceState(outState);
-        editFrag.onSaveInstanceState(outState);
+        outState.putParcelable(USER, mUser);
+        if (displayFrag.isAdded()){
+            displayFrag.onSaveInstanceState(outState);
+        }
+        else if (editFrag.isAdded()){
+            editFrag.onSaveInstanceState(outState);
+        }
+
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        displayFrag.onViewStateRestored(savedInstanceState);
-        editFrag.onViewStateRestored(savedInstanceState);
+        mUser = (User) savedInstanceState.getParcelable(USER);
+        if(displayFrag.isAdded()){
+            displayFrag.onViewStateRestored(savedInstanceState);
+            ft = getSupportFragmentManager().beginTransaction();
+            ft.remove(editFrag);
+            ft.add(R.id.displayLayout, displayFrag);
+            ft.commit();
+        }
+        else if(editFrag.isAdded()){
+            editFrag.onViewStateRestored(savedInstanceState);
+            ft = getSupportFragmentManager().beginTransaction();
+            ft.remove(displayFrag);
+            ft.add(R.id.displayLayout, editFrag);
+            ft.commit();
+        }
+
+
     }
 }
